@@ -11,114 +11,229 @@ movies, directors, and genres. Users will be able to sign up, update their
 personal information, and create a list of their favorite movies.
     </p>
     <table>
-      <thead>
-        <tr>
-          <th>Business Logic</th>
-          <th>URL</th>
-          <th>HTTP Method</th>
-          <th>Request body data format</th>
-          <th>Response body data format</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Get a list of movies</td>
-          <td>/movies</td>
-          <td>GET</td>
-          <td>None</td>
-          <td>A JSON object holding data about all the movies</td>
-        </tr>
-        <tr>
-          <td>Get data about a single movie by title</td>
-          <td>/movies/[title]</td>
-          <td>GET</td>
-          <td>None</td>
-          <td>
-            A JSON object holding data about a single movie,<br>
-            Example:<br>
-            {<br>
-              id: 1,<br>
-              title: 'Conan the Barbarian',<br>
-              director: 'John Milius'<br>
-            }
-          </td>
-        </tr>
-        <tr>
-          <td>Get a list of users</td>
-          <td>/users</td>
-          <td>GET</td>
-          <td>None</td>
-          <td>A JSON object holding data about all the users</td>
-        </tr>
-        <tr>
-          <td>Get data about a single user by name</td>
-          <td>/users/[name]</td>
-          <td>GET</td>
-          <td>None</td>
-          <td>
-            A JSON object holding data about a single user,<br>
-            Example:<br>
-            {<br>
-              name: 'user1',<br>
-              password: 'user1!'',<br>
-              mail: 'user1@gmx.net'<br>
-            }
-          </td>
-        </tr>
-        <tr>
-          <td>Add an user</td>
-          <td>/users</td>
-          <td>POST</td>
-          <td>
-            A JSON object holding data about the user to add,<br>
-            Example:<br>
-            {<br>
-              name: 'user1',<br>
-              password: 'user1!'',<br>
-              mail: 'user1@gmx.net'<br>
-            }
-          </td>
-          <td>
-            A JSON object holding data about the user to add,<br>
-            Example:<br>
-            {<br>
-              name: 'user1',<br>
-              password: 'user1!'',<br>
-              mail: 'user1@gmx.net'<br>
-              favoriteMovie: [],<br>
-              __v: 0<br>
-            }
-          </td>
-        </tr>
-        <tr>
-          <td>Add a movie by ID to the favorite list of an user</td>
-          <td>/users/[name]/movies/[movieId]</td>
-          <td>POST</td>
-          <td>None</td>
-          <td>A JSON file with MovieID as vlaue of FavoriteMovies key</td>
-        </tr>
-        <tr>
-          <td>Update a certain user</td>
-          <td>/users/[name]</td>
-          <td>PUT</td>
-          <td>None</td>
-          <td>A text message indicating wheter the user was updated</td>
-        </tr>
-        <tr>
-          <td>Delete an user</td>
-          <td>/users/[name]</td>
-          <td>DELETE</td>
-          <td>None</td>
-          <td>A text message indicating whether the user was successfully removed</td>
-        </tr>
-        <tr>
-          <td>Remove a movie by ID from the FavoriteMovies of an user</td>
-          <td>/users/[name]/movies/[movieId]</td>
-          <td>DELETE</td>
-          <td>None</td>
-          <td>A text message indicating whether the movie was successfully removed</td>
-        </tr>
-      </tbody>
+        <thead>
+            <tr>
+                <th>Business Logic</th>
+                <th>URL</th>
+                <th>HTTP Method</th>
+                <th>Request body date format</th>
+                <th>Response body date format</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Get a list of all movies</td>
+                <td>/movies</td>
+                <td>GET</td>
+                <td>None</td>
+                <td>A JSON object holding data about all the movies</td>
+            </tr>
+
+            <tr>
+                <td>Get data about a single movie by title</td>
+                <td>/movies/[Title]</td>
+                <td>GET</td>
+                <td>None</td>
+                <td>A JSON object holding data about a single movie,<br>
+                Example:<br>
+                        <p>
+                            {<br>
+                                <span class="indent">"Genre": </span><br>
+                                <span class="double-indent">"Name": "Genre's name",</span><br>
+                                <span class="double-indent">"Description": "Description of the genre.",</span><br>
+                                <span class="indent">"Director: "</span><br>
+                                <span class="double-indent">"Name": "Director's Name",</span><br>
+                                <span class="double-indent">"Bio": "Director's biography",</span><br>
+                                <span class="double-indent">"Birthyear": "YYYY",</span><br>
+                                <span class="double-indent">"Deathyear": "YYYY",</span><br>
+                                <span class="indent">"_id": objectId,</span><br>
+                                <span class="indent">"Title": "Movie Name",</span><br>
+                                <span class="indent">"Description": "Movie description",</span><br>
+                                <!-- <span class="indent">"Actors": ["Actor 1", "Actor 2"],</span><br> -->
+                                <span class="indent">"imageUrl": "www.link.to/movie/coverartwork",</span><br>
+                                <span class="indent">"Featured": Boolean</span><br>
+                            }
+                        </p>
+            </tr>
+
+            <tr>
+                <td>Get data about a Genre</td>
+                <td>/genres/[Name]</td>
+                <td>GET</td>
+                <td>None</td>
+                <td>
+                  A JSON object holding data about all the movies in specified genre
+                </td>
+              </tr>
+              <tr>
+                <td>Get data about a movie genre by name</td>
+                <td>/genres/[Name]</td>
+                <td>GET</td>
+                <td> Specify genre name in URL. The query is case sensitive.</td>
+                <td>A JSON object holding data about a single movie director,<br>
+                    Example:<br>
+                    <p>
+                        {<br>
+                            <span class="indent">"Name": "Genre's name",</span><br>
+                            <span class="indent">"Description": "Description of the selected genre..."</span><br>
+                        }
+                    </p>
+                </td>
+            </tr>
+
+            <tr>
+                <td>Get data about all Directors</td>
+                <td>/directors</td>
+                <td>GET</td>
+                <td>None</td>
+                <td>A JSON object holding data about a single director,<br>
+            </tr>
+            <tr>
+                <td>Get data about a single movie director by name</td>
+                <td>/directors/[Name]</td>
+                <td>GET</td>
+                <td> Specify director name in URL. The query is case sensitive.</td>
+                <td>A JSON object holding data about a single movie director,<br>
+                    Example:<br>
+                    <p>
+                        {<br>
+                            <span class="indent">"_id": objectId,</span><br>
+                            <span class="double-indent">"Name": "Director's Name",</span><br>
+                            <span class="double-indent">"Bio": "Director's biography",</span><br>
+                            <span class="double-indent">"Birthyear": "YYYY",</span><br>
+                            <span class="double-indent">"Deathyear": "YYYY"</span><br>
+                        }
+                    </p>
+                </td>
+            </tr>
+
+            <tr>
+                <td>Get a list of users</td>
+                <td>/users</td>
+                <td>GET</td>
+                <td>None</td>
+                <td>A JSON object holding data about all the users</td>
+            </tr>
+            <tr>
+                    <td>Get data about a user by name</td>
+                    <td>/users/[Name]</td>
+                    <td>GET</td>
+                    <td> Specify director name in URL. The query is case sensitive.</td>
+                    <td>A JSON object holding data about a single user,<br>
+                        Example:<br>
+                        <p>
+                            {<br>
+                                <span class="indent">"_id": objectId,</span><br>
+                                <span class="indent">"Name": "Firstname",</span><br>
+                                <span class="indent">"Username": "Username",</span><br>
+                                <span class="indent">"Password": "Password",</span><br>
+                                <span class="indent">"Email": "example@mail.com",</span><br>
+                                <span class="indent">"Birthday": "YYYY-mm-dd",</span><br>
+                                <span class="indent">"FavoritesMovies": [MovieID1, MovieID2]</span><br>
+                            }
+                        </p>
+                    </td>
+                </tr>
+
+            <tr>
+                <td>Add a new user by registering</td>
+                <td>/users</td>
+                <td>POST</td>
+                <td>A JSON object holding data about the new user to add,<br>
+                    structure like this:
+                    <p>
+                        {<br>
+                            <span class="indent">"Name": "Firstname",</span><br>
+                            <span class="indent">"Username": "Username",</span><br>
+                            <span class="indent">"Password": "Password",</span><br>
+                            <span class="indent">"Email": "example@mail.com",</span><br>
+                            <span class="indent">"Birthday": "YYYY-mm-dd",</span><br>
+                        }
+                    </p>
+
+                </td>
+                <td>A JSON object holding data about the user that was added, including an ID:
+                    <p>
+                        {<br>
+                            <span class="indent">"_id": objectId,</span><br>
+                            <span class="indent">"Name": "Firstname",</span><br>
+                            <span class="indent">"Username": "Username",</span><br>
+                            <span class="indent">"Password": "Password",</span><br>
+                            <span class="indent">"Email": "example@mail.com",</span><br>
+                            <span class="indent">"Birthday": "YYYY-mm-dd",</span><br>
+                        }
+                    </p>
+                </td>
+            </tr>
+
+            <tr>
+                <td>Allow users to add a movie to favorite list</td>
+                    <td>/users/[Username]/movies/[MovieID]</td>
+                    <td>POST</td>
+                    <td>None
+                    </td>
+                    <td>A JSON object holding data of a user info that is sucessfully updated,<br>
+                        Example:<br>
+                        <p>
+                            {<br>
+                                <span class="indent">"_id": objectId,</span><br>
+                                <span class="indent">"Name": "Firstname",</span><br>
+                                <span class="indent">"Username": "Username",</span><br>
+                                <span class="indent">"Password": "Password",</span><br>
+                                <span class="indent">"Email": "new.email-address@mail.com",</span><br>
+                                <span class="indent">"Birthday": "YYYY-mm-dd",</span><br>
+                                <span class="indent">"FavoritesMovies": [MovieID1]</span><br>
+                            }
+                        </p>
+                    </td>
+            </tr>
+
+            <tr>
+                <td>Update a certain user by username</td>
+                <td>/users/[Username]</td>
+                <td>PUT</td>
+                <td>A JSON object holding data about user info to update,<br>
+                    Example:<br>
+                    <p>
+                        {<br>
+                            <span class="indent">"Email": "new.email-address@mail.com",</span>
+                        }
+                    </p>
+                </td>
+                <td>A JSON object holding data of a user info that is sucessfully updated,<br>
+                    Example:<br>
+                    <p>
+                        {<br>
+                            <span class="indent">"_id": objectId,</span><br>
+                            <span class="indent">"Name": "Firstname",</span><br>
+                            <span class="indent">"Username": "Username",</span><br>
+                            <span class="indent">"Password": "Password",</span><br>
+                            <span class="indent">"Email": "new.email-address@mail.com",</span><br>
+                            <span class="indent">"Birthday": "YYYY-mm-dd",</span><br>
+                        }
+                    </p>
+                </td>
+            </tr>
+
+            <tr>
+                <td>Allow users to remove a movie from their favorite list</td>
+                <td>/users/[Username]/movies/[MovieID]</td>
+                <td>DELETE</td>
+                <td>None</td>
+                <td>A text message indicating whether the movie was successfully removed</td>
+            </tr>
+
+            <tr>
+                <td>Allow users to de-register</td>
+                <td>/users/[Username]</td>
+                <td>DELETE</td>
+                <td>None
+                </td>
+                <td>A text message that indicating the user was successfully de-registered.
+                </td>
+            </tr>
+
+        </tbody>
     </table>
   </body>
 </html>
