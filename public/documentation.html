@@ -33,7 +33,7 @@ personal information, and create a list of their favorite movies.
                 <td>Get data about a single movie by title</td>
                 <td>/movies/[Title]</td>
                 <td>GET</td>
-                <td>None</td>
+                <td>Specify title name in URL. The query is case sensitive.</td>
                 <td>A JSON object holding data about a single movie,<br>
                 Example:<br>
                         <p>
@@ -49,7 +49,6 @@ personal information, and create a list of their favorite movies.
                                 <span class="indent">"_id": objectId,</span><br>
                                 <span class="indent">"Title": "Movie Name",</span><br>
                                 <span class="indent">"Description": "Movie description",</span><br>
-                                <!-- <span class="indent">"Actors": ["Actor 1", "Actor 2"],</span><br> -->
                                 <span class="indent">"imageUrl": "www.link.to/movie/coverartwork",</span><br>
                                 <span class="indent">"Featured": Boolean</span><br>
                             }
@@ -116,16 +115,15 @@ personal information, and create a list of their favorite movies.
             </tr>
             <tr>
                     <td>Get data about a user by name</td>
-                    <td>/users/[Username]</td>
+                    <td>/users/[Name]</td>
                     <td>GET</td>
-                    <td> Specify director name in URL. The query is case sensitive.</td>
+                    <td> Specify user name in URL. The query is case sensitive.</td>
                     <td>A JSON object holding data about a single user,<br>
                         Example:<br>
                         <p>
                             {<br>
                                 <span class="indent">"_id": objectId,</span><br>
                                 <span class="indent">"Name": "Firstname",</span><br>
-                                <span class="indent">"Username": "Username",</span><br>
                                 <span class="indent">"Password": "Password",</span><br>
                                 <span class="indent">"Email": "example@mail.com",</span><br>
                                 <span class="indent">"Birthday": "YYYY-mm-dd",</span><br>
@@ -144,10 +142,9 @@ personal information, and create a list of their favorite movies.
                     <p>
                         {<br>
                             <span class="indent">"Name": "Firstname",</span><br>
-                            <span class="indent">"Username": "Username",</span><br>
                             <span class="indent">"Password": "Password",</span><br>
                             <span class="indent">"Email": "example@mail.com",</span><br>
-                            <span class="indent">"Birthday": "YYYY-mm-dd",</span><br>
+                            <span class="indent">"Birthday": "YYYY-mm-dd"</span><br>
                         }
                     </p>
 
@@ -160,7 +157,7 @@ personal information, and create a list of their favorite movies.
                             <span class="indent">"Username": "Username",</span><br>
                             <span class="indent">"Password": "Password",</span><br>
                             <span class="indent">"Email": "example@mail.com",</span><br>
-                            <span class="indent">"Birthday": "YYYY-mm-dd",</span><br>
+                            <span class="indent">"Birthday": "YYYY-mm-dd"</span><br>
                         }
                     </p>
                 </td>
@@ -170,8 +167,7 @@ personal information, and create a list of their favorite movies.
                 <td>Allow users to add a movie to favorite list</td>
                     <td>/users/[Username]/movies/[MovieID]</td>
                     <td>POST</td>
-                    <td>None
-                    </td>
+                    <td>Specify user name and movie ID in URL. The query is case sensitive.</td>
                     <td>A JSON object holding data of a user info that is sucessfully updated,<br>
                         Example:<br>
                         <p>
@@ -196,7 +192,7 @@ personal information, and create a list of their favorite movies.
                     Example:<br>
                     <p>
                         {<br>
-                            <span class="indent">"Email": "new.email-address@mail.com",</span>
+                            <span class="indent">"Email": "new.email-address@mail.com"</span>
                         }
                     </p>
                 </td>
@@ -206,10 +202,9 @@ personal information, and create a list of their favorite movies.
                         {<br>
                             <span class="indent">"_id": objectId,</span><br>
                             <span class="indent">"Name": "Firstname",</span><br>
-                            <span class="indent">"Username": "Username",</span><br>
                             <span class="indent">"Password": "Password",</span><br>
                             <span class="indent">"Email": "new.email-address@mail.com",</span><br>
-                            <span class="indent">"Birthday": "YYYY-mm-dd",</span><br>
+                            <span class="indent">"Birthday": "YYYY-mm-dd"</span><br>
                         }
                     </p>
                 </td>
