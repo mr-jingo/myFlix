@@ -121,7 +121,7 @@ app.get('/users/:name', (req, res) => {
 
 //POST requests
 app.post('/users', (req, res) => {
-  Users.findOne({ Name: req.body.Name })
+  Users.findOne({ Name: req.body.name })
     .then((user) => {
       if (user) {
         return res.status(400).send(req.body.name + 'already exists');
