@@ -76,7 +76,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/movies', (req, res) => {
-  Users.find()
+  Movies.find()
     .then((movies) => {
       res.status(201).json(movies);
     })
@@ -87,7 +87,7 @@ app.get('/movies', (req, res) => {
 });
 
 app.get('/movies/:title', (req, res) => {
-  Users.findOne({ Title: req.params.title })
+  Movies.findOne({ Title: req.params.title })
     .then((movie) => {
       res.json(movie);
     })
