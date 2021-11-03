@@ -2,7 +2,10 @@ const express = require('express'),
       morgan = require('morgan'),
       mongoose = require('mongoose'),
       bodyParser = require('body-parser'),
-      passport = require('passport');
+      passport = require('passport'),
+      cors = require('cors');
+
+const { check, validationResult } = require('express-validator');
 
 const Models = require('./models.js');
 const Movies = Models.Movie;
@@ -22,11 +25,7 @@ app.use(passport.initialize());
 require('./passport');
 let auth = require('./auth')(app);
 
-const { check, validationResult } = require('express-validator');
-
-const cors = require('cors');
-app.use(cors());
-/*let allowedOrigins = ['http://localhost:8080', 'http://testsite.com'];
+let allowedOrigins = ['http://localhost:8080', 'http://testsite.com'];
 
 app.use(cors({
   origin: (origin, callback) => {
@@ -37,7 +36,7 @@ app.use(cors({
     }
     return callback(null, true);
   }
-}));*/
+}));
 
 /*let topMovies = [
   {
@@ -147,12 +146,12 @@ app.post('/users', [
     check('Username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric(),
     check('Password', 'Password is required').not().isEmpty(),
     check('Email', 'Email does not appear to be valid').isEmail()
-  ], ((req, res) => {
+  ], (req, res) => {
   let errors = validationResult(req);
   if (!errors.isEmpty()) {
       return res.status(422).json({ errors: errors.array() });
     }
-  //let hashedPassword = Users.hashPassword(req.body.Password);
+  let hashedPassword = Users.hashPassword(req.body.Password);
   Users.findOne({ Username: req.body.Username })
     .then((user) => {
       if (user) {
@@ -161,7 +160,7 @@ app.post('/users', [
         Users
           .create({
             Username: req.body.Username,
-            Password: req.body.Password,
+            Password: hashedPassword,
             Email: req.body.Email,
             Birthday: req.body.Birthday
           })
@@ -169,14 +168,14 @@ app.post('/users', [
         .catch((error) => {
           console.error(error);
           res.status(500).send('Error: ' + error);
-        })
+        });
       }
     })
     .catch((error) => {
       console.error(error);
       res.status(500).send('Error: ' + error);
     });
-}));
+});
 
 app.post('/users/:Username/movies/:MovieID', passport.authenticate('jwt', { session: false }), (req, res) => {
   Users.findOneAndUpdate({ Username: req.params.Username }, {
