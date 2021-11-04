@@ -12,7 +12,8 @@ const Movies = Models.Movie;
 const Users = Models.User;
 
 //mongoose.connect('mongodb://localhost:27017/myFlixMongoDB', { useNewUrlParser: true, useUnifiedTopology: true });
-mongoose.connect('mongodb+srv://TestUserEins:a54KpeRWtjgY5YFs@cfmyflixmongodb.5auxn.mongodb.net/CFmyFlixMongoDB?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true });
+//mongoose.connect('mongodb+srv://TestUserEins:a54KpeRWtjgY5YFs@cfmyflixmongodb.5auxn.mongodb.net/myFlixMongoDB?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 
 const app = express();
 
